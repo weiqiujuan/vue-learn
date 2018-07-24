@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>anync-demo</title>
+    <style type="text/css">
+
+    </style>
+</head>
+<body>
+<div id="example">
+    {{message}}
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    Vue.component('example',{
+        template:'<span>{{ message }}</span>',
+        data:function () {
+            return{
+                message:'无更新'
+            }
+        },
+        methods:{
+            updateMessage:function () {
+                this.message='更新ing...';
+                console.log(this.$el.textContent);
+                this.$nextClick(function () {
+                    console.log(this.$el.textContent);
+                })
+            }
+        }
+    });
+    new Vue({
+        el:"#example",
+        data:{
+            message:'123'
+        }
+    });
+    vm.message='new message';
+    vm.$el.textContent==='new message'
+    Vue.nextClick(function () {
+        vm.$el.textContent==='new message';
+    })
+
+</script>
+
+</body>
+</html>

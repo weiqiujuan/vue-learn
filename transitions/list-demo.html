@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/lodash.js/4.14.1/lodash.min.js"></script>
+    <title>ListDemo</title>
+    <style type="text/css">
+        .list-item{
+            -webkit-transition: all 1s;
+            -moz-transition: all 1s;
+            -ms-transition: all 1s;
+            -o-transition: all 1s;
+            transition: all 1s;
+            display: inline-block;
+            margin-right: 10px;
+        }
+        .list-complete-enter,.list-complete-leave-to{
+            opacity: 0;
+            transform: translateY(30px);
+        }
+        .list-complete-active{
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<div id="list-demo-co" class="demo">
+    <button v-on:click="shuffle">shuffle</button>
+    <button v-on:click="add">add</button>
+    <button v-on:click="remove">remove</button>
+    <transition-group name="list-complete" tag="p">
+        <span v-for="item in items" v-bind:key="item" class="list-item">
+            {{item}}
+        </span>
+    </transition-group>
+
+</div>
+
+<script>
+    new Vue({
+        el: "#list-demo-co",
+        data:{
+            items:[1,2,3,4,5,6,7,8,9],
+            nextNum:10
+        },
+        methods:{
+            randomIndex:function () {
+                return Math.floor(Math.random()*this.items.length)
+            },
+            add:function () {
+                this.items.splice(this.randomIndex(),0,this.nextNum++)
+            },
+            remove:function () {
+                this.items.splice(this.randomIndex(),1)
+            },
+            shuffle:function () {
+                this.items=_.shuffle(this.items)
+            }
+        }
+
+    })
+</script>
+</body>
+</html>

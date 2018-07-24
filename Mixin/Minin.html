@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Minin</title>
+</head>
+<body>
+<div id="">
+
+
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script>
+    //定义一个混入对象
+    let myMixin={
+        created:function () {
+            this.hello()
+        },
+        methods:{
+            hello:function () {
+                console.log('hello weiqiujuan')
+            }
+        }
+    };
+    //定义一个使用混入对象的组件
+    let Component=Vue.extend({
+        mixins:[myMixin]
+    });
+
+    let component=new Component()
+
+
+</script>
+</body>
+</html>

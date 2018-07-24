@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Markdown</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/velocity/1.2.3/velocity.min.js"></script>
+</head>
+<body>
+<div id="Markdown">
+    <h1 style="text-align: center">蠢萌的MarkDown编辑器</h1>
+    <textarea name="editor" cols="30" rows="10" :value="input" @input="update">
+    </textarea>
+    <div v-html="compliedMarkdown"></div>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/marked@0.3.6"></script>
+<script src="https://unpkg.com/lodash@4.16.0"></script>
+<script>
+    new Vue({
+        el: "#Markdown",
+        data: {
+            input: '# weiqiujuan'
+        },
+        computed: {
+            compliedMarkdown: function () {
+                return marked(this.input, {sanitize: true})
+            }
+        },
+        methods: {
+            update: _.debounce(function (e) {
+                this.input = e.target.value
+            }, 300)
+        }
+    })
+</script>
+<style>
+    html, body, #Markdown {
+        margin: 0;
+        height: 100%;
+        font-family: 'Haettenschweiler';
+        color: #333333;
+    }
+
+    textarea, #Markdown div {
+        display: inline-block;
+        width: 49%;
+        height: 100%;
+        vertical-align: top;
+        box-sizing: border-box;
+        padding: 0 20px;
+    }
+
+    textarea {
+        border: none;
+        border-right: 1px solid #cccccc;
+        resize: none;
+        outline: none;
+        background-color: #f6f6f6;
+        font-size: 14px;
+        font-family: 'Monaco', courier, monospace;
+        padding: 20px;
+    }
+</style>
+</body>
+</html>
